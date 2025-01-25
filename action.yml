@@ -1,0 +1,44 @@
+name: Setup Summon
+description: 'Setup Summon for use in your GitHub Actions workflow'
+inputs:
+  version:
+    description: 'The version of Summon to install'
+    required: true
+    default: 'v0.10.2'
+  download-url:
+    description: 'The URL to download Summon from'
+    required: true
+    default: 'https://github.com/cyberark/summon/releases/download'
+runs:
+  using: "composite"
+  steps:
+    - name: Gather info for linux
+      if: runner.os == 'Linux'
+      id: info-linux
+      shell: bash
+      run: |
+        # Get os info
+        if [[ $(uname -m) == "x86_64" ]]; then
+          echo "asset-name=summon-linux-amd64" >> "$GITHUB_OUTPUT"
+        elif [[ $(uname -m) == "aarch64" ]]; then
+          echo "asset-name=summon-linux-arm64" >> "$GITHUB_OUTPUT"
+        fi
+
+        TARGET_DIR=$(mktemp -d -t summon.XXXXXX)
+        echo "destination-folder=${TARGET_DIR}" >> "$GITHUB_OUTPUT"
+
+
+    - name: Setup on Linux
+      shell: bash
+      if: runner.os == 'Linux'
+      run: |
+        # Set up Summon on Linux
+        curl -LsJ "${DOWNLOAD_URL}/${VERSION}/${ASSET_NAME}.tar.gz" -o "${DESTINATION_FOLDER}/${ASSET_NAME}.tar.gz"
+        tar -xzf "${DESTINATION_FOLDER}/${ASSET_NAME}.tar.gz" -C "${DESTINATION_FOLDER}"
+        chmod +x "${DESTINATION_FOLDER}/summon"
+        echo "${DESTINATION_FOLDER}" >> $GITHUB_PATH
+      env:
+        VERSION: ${{ inputs.version }}
+        DOWNLOAD_URL: ${{ inputs.download-url }}
+        ASSET_NAME: ${{ steps.info-linux.outputs.asset-name }}
+        DESTINATION_FOLDER: ${{ steps.info-linux.outputs.destination-folder }}
