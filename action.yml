@@ -18,10 +18,14 @@ runs:
       shell: bash
       run: |
         # Get os info
-        if [[ $(uname -m) == "x86_64" ]]; then
+        PROC_TYPE="$(uname -p)"
+        if [[ "${PROC_TYPE}" == "x86_64" ]]; then
           echo "asset-name=summon-linux-amd64" >> "$GITHUB_OUTPUT"
-        elif [[ $(uname -m) == "aarch64" ]]; then
+        elif [[ "${PROC_TYPE}" == "aarch64" ]]; then
           echo "asset-name=summon-linux-arm64" >> "$GITHUB_OUTPUT"
+        else
+          echo "error: unsupported architecture: ${PROC_TYPE}"
+          exit 1
         fi
 
         TARGET_DIR=$(mktemp -d -t summon.XXXXXX)
