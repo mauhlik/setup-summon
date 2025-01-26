@@ -22,7 +22,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Test Local Action
-        id: test-action
+        id: test-action-01
+        uses: ./
+
+      - name: Print summon version
+        run: summon --version
+
+      - name: Test Local Action
+        id: test-action-02
         uses: ./
 
       - name: Print summon version

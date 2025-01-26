@@ -12,12 +12,35 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Gather info for linux
+    - name: Check if Summon is already installed on Linux
       if: runner.os == 'Linux'
+      id: check-summon-linux
+      shell: bash
+      run: |
+        # check-summon
+        if command -v summon &> /dev/null; then
+          INSTALLED_VERSION="$(summon --version | sed -e 's/^summon version //')"
+          if printf -- '%s' "v${INSTALLED_VERSION}" | egrep -q -- "${SUMMON_VERSION}"
+          then
+            echo "install-summon=false" >> "$GITHUB_OUTPUT"
+            echo "::debug::Summon is installed at version ${INSTALLED_VERSION}"
+          else
+            echo "install-summon=true" >> "$GITHUB_OUTPUT"
+            echo "::debug::Summon version does not match. Installed: ${INSTALLED_VERSION}, Required: ${SUMMON_VERSION}"
+          fi
+        else
+          echo "install-summon=true" >> "$GITHUB_OUTPUT"
+          echo "::debug::Summon is not installed"
+        fi
+      env:
+        SUMMON_VERSION: ${{ inputs.version }}
+
+    - name: Gather info for linux
+      if: runner.os == 'Linux' && steps.check-summon-linux.outputs.install-summon == 'true'
       id: info-linux
       shell: bash
       run: |
-        # Get os info
+        # info-linux
         PROC_TYPE="$(uname -p)"
         if [[ "${PROC_TYPE}" == "x86_64" ]]; then
           echo "asset-name=summon-linux-amd64" >> "$GITHUB_OUTPUT"
@@ -33,10 +56,11 @@ runs:
 
 
     - name: Setup on Linux
+      if: runner.os == 'Linux' && steps.check-summon-linux.outputs.install-summon == 'true'
+      id: setup-linux
       shell: bash
-      if: runner.os == 'Linux'
       run: |
-        # Set up Summon on Linux
+        # setup-linux
         curl -LsJ "${DOWNLOAD_URL}/${VERSION}/${ASSET_NAME}.tar.gz" -o "${DESTINATION_FOLDER}/${ASSET_NAME}.tar.gz"
         tar -xzf "${DESTINATION_FOLDER}/${ASSET_NAME}.tar.gz" -C "${DESTINATION_FOLDER}"
         chmod +x "${DESTINATION_FOLDER}/summon"
