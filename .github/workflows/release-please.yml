@@ -11,7 +11,5 @@ jobs:
   release-please:
     uses: mauhlik/reusable-workflows/.github/workflows/release-please.yml@v1
     with:
-      app-id: ${{ vars.RELEASE_PLEASE_APP_ID }}
       environment: default
-    secrets:
-      app-private-key: ${{ secrets.RELEASE_PLEASE_PRIVATE_KEY }}
+    secrets: inherit
