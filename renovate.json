@@ -5,7 +5,7 @@
     {
       "fileMatch": ["^action\\.yml$"],
       "matchStrings": [
-        "^\\s*default:\\s*['\"]?(?<depName>v?[0-9]+\\.[0-9]+\\.[0-9]+)['\"]?$"
+        "^\\s*default:\\s*['\"]?(?<depName>cyberark/summon)['\"]?\\s*:\\s*['\"]?(?<currentValue>v?[0-9]+\\.[0-9]+\\.[0-9]+)['\"]?$"
       ],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "cyberark/summon"
