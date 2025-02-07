@@ -10,8 +10,7 @@
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "cyberark/summon",
       "lookupNameTemplate": "cyberark/summon",
-      "versioning": "semver",
-      "updateTypes": ["version-update:semver-major", "version-update:semver-minor", "version-update:semver-patch"]
+      "versioning": "semver"
     }
   ]
 }
