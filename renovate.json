@@ -1,6 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPaths": ["action.yml"],
+      "extractVersion": "^\\s*default:\\s*'?(v?[\\d.]+)'?$",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "cyberark/summon",
+      "lookupNameTemplate": "cyberark/summon",
+      "versioning": "semver",
+      "updateTypes": ["version-update:semver-major", "version-update:semver-minor", "version-update:semver-patch"]
+    }
   ]
 }
