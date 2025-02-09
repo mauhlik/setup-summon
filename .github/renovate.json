@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "commitMessagePrefix": "fix: ",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^action\\.yml$"],
+      "matchStrings": [
+        "(?m)^\\s*default:\\s*['\"]?(?<currentValue>v?[0-9]+\\.[0-9]+\\.[0-9]+)['\"]?"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "cyberark/summon",
+      "currentValueTemplate": "{{currentValue}}",
+      "versioningTemplate": "semver"
+    }
+  ]
+}
