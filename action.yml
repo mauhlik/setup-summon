@@ -4,7 +4,7 @@ inputs:
   version:
     description: 'The version of Summon to install'
     required: true
-    default: 'v0.10.4'
+    default: 'v0.10.5'
   download-url:
     description: 'The URL to download Summon from'
     required: true
