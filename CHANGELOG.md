@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/mauhlik/setup-summon/compare/v1.1.2...v1.1.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* Update dependency cyberark/summon to v0.10.5 ([#28](https://github.com/mauhlik/setup-summon/issues/28)) ([aebae2b](https://github.com/mauhlik/setup-summon/commit/aebae2bc474bcda1d10799e851590d82543c8552))
+
 ## [1.1.2](https://github.com/mauhlik/setup-summon/compare/v1.1.1...v1.1.2) (2025-04-25)
 
 
