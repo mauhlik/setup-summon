@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/mauhlik/setup-summon/compare/v1.1.3...v1.1.4) (2025-08-12)
+
+
+### Bug Fixes
+
+* Update actions/checkout action to v5 ([#30](https://github.com/mauhlik/setup-summon/issues/30)) ([348d6ae](https://github.com/mauhlik/setup-summon/commit/348d6ae573b22871432928ee23ddd5e8e32582b0))
+
 ## [1.1.3](https://github.com/mauhlik/setup-summon/compare/v1.1.2...v1.1.3) (2025-08-04)
 
 
