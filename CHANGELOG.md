@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.5](https://github.com/mauhlik/setup-summon/compare/v1.1.4...v1.1.5) (2025-11-22)
+
+
+### Bug Fixes
+
+* Update actions/checkout action to v6 ([#33](https://github.com/mauhlik/setup-summon/issues/33)) ([8cc641d](https://github.com/mauhlik/setup-summon/commit/8cc641d3ea8cf44118ac59a9cb5edaad776e0076))
+* Update dependency cyberark/summon to v0.10.9 ([#32](https://github.com/mauhlik/setup-summon/issues/32)) ([9058356](https://github.com/mauhlik/setup-summon/commit/90583568f1c96f31dfa3fb762eeeb8420918a671))
+
 ## [1.1.4](https://github.com/mauhlik/setup-summon/compare/v1.1.3...v1.1.4) (2025-08-12)
 
 
